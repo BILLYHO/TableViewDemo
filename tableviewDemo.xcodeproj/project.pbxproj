@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F65E676C197FB7FA0071320A /* SimpleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65E676B197FB7F90071320A /* SimpleTableViewController.m */; };
 		F69500021975076B005D77B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F69500011975076B005D77B2 /* Foundation.framework */; };
 		F69500041975076B005D77B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F69500031975076B005D77B2 /* CoreGraphics.framework */; };
 		F69500061975076B005D77B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F69500051975076B005D77B2 /* UIKit.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F65E676A197FB7F90071320A /* SimpleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableViewController.h; sourceTree = "<group>"; };
+		F65E676B197FB7F90071320A /* SimpleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableViewController.m; sourceTree = "<group>"; };
 		F69500011975076B005D77B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F69500031975076B005D77B2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F69500051975076B005D77B2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -96,6 +99,8 @@
 			children = (
 				F69500101975076B005D77B2 /* AppDelegate.h */,
 				F69500111975076B005D77B2 /* AppDelegate.m */,
+				F65E676A197FB7F90071320A /* SimpleTableViewController.h */,
+				F65E676B197FB7F90071320A /* SimpleTableViewController.m */,
 				F69500161975076B005D77B2 /* ViewController.h */,
 				F69500171975076B005D77B2 /* ViewController.m */,
 				F695003919751F06005D77B2 /* CustomTableViewCell.h */,
@@ -260,6 +265,7 @@
 			files = (
 				F69500181975076B005D77B2 /* ViewController.m in Sources */,
 				F69500121975076B005D77B2 /* AppDelegate.m in Sources */,
+				F65E676C197FB7FA0071320A /* SimpleTableViewController.m in Sources */,
 				F695003B19751F06005D77B2 /* CustomTableViewCell.m in Sources */,
 				F695000E1975076B005D77B2 /* main.m in Sources */,
 			);

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "SimpleTableViewController.h"
 
 @implementation AppDelegate
 
@@ -18,7 +19,7 @@
     self.window.backgroundColor = UIColor.whiteColor;
     
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc]init]];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[SimpleTableViewController alloc]init]];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     return YES;
