@@ -14,9 +14,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 44)];
+        
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 20)];
         [self addSubview:_label];
+        
+        self.backgroundColor = [UIColor lightGrayColor];
     }
     return self;
 }

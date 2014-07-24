@@ -1,19 +1,19 @@
 //
-//  ViewController.m
+//  CustomedTableViewController.m
 //  tableviewDemo
 //
-//  Created by billy.ho on 7/15/14.
+//  Created by billy.ho on 7/24/14.
 //  Copyright (c) 2014 BILLYHO. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CustomedTableViewController.h"
 #import "CustomTableViewCell.h"
 
-@interface ViewController ()
+@interface CustomedTableViewController ()
 
 @end
 
-@implementation ViewController
+@implementation CustomedTableViewController
 
 - (void)viewDidLoad
 {
@@ -54,11 +54,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"SimpleTableIdentifier";
-
+    
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier: identifier];
+                                          reuseIdentifier: identifier];
+        cell.frame = CGRectMake(0, 0, 320, 50);
     }
     
     NSString *content = [NSString stringWithFormat:@"Row %d, Section %d", indexPath.row, indexPath.section];
@@ -66,7 +67,11 @@
     [cell configCell:content];
     return cell;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
+}
 #pragma -
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -7,7 +7,7 @@
 //
 
 #import "SimpleTableViewController.h"
-#import "ViewController.h"
+#import "CustomedTableViewController.h"
 
 @interface SimpleTableViewController ()
 
@@ -42,12 +42,12 @@
 
 - (void)setupContentArr
 {
-    _contentArr = @[@"Customed Table View"];
+    _contentArr = @[@"Customed TableView Cell"];
 }
 
 - (void)setupVCArr
 {
-    ViewController *view = [[ViewController alloc] init];
+    CustomedTableViewController *view = [[CustomedTableViewController alloc] init];
     _vcArr = @[view];
 }
 
