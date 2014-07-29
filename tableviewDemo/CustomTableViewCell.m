@@ -7,6 +7,7 @@
 //
 
 #import "CustomTableViewCell.h"
+#import "UIColor+Hexcolor.h"
 
 @implementation CustomTableViewCell
 
@@ -18,7 +19,8 @@
         _label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 20)];
         [self addSubview:_label];
         
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor colorFromHexString:@"#F5F5F5"];
+        _label.textColor = [UIColor colorFromHexString:@"#333333"];
     }
     return self;
 }

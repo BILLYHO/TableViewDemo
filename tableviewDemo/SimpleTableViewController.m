@@ -8,6 +8,7 @@
 
 #import "SimpleTableViewController.h"
 #import "CustomedTableViewController.h"
+#import "PullToRefreshTableViewController.h"
 
 @interface SimpleTableViewController ()
 
@@ -42,13 +43,14 @@
 
 - (void)setupContentArr
 {
-    _contentArr = @[@"Customed TableView Cell"];
+    _contentArr = @[@"Customed TableView Cell" , @"Pull To Refresh TableView"];
 }
 
 - (void)setupVCArr
 {
-    CustomedTableViewController *view = [[CustomedTableViewController alloc] init];
-    _vcArr = @[view];
+    CustomedTableViewController *view1 = [[CustomedTableViewController alloc] init];
+    PullToRefreshTableViewController *view2 = [[PullToRefreshTableViewController alloc]init];
+    _vcArr = @[view1, view2];
 }
 
 #pragma -
