@@ -124,7 +124,6 @@
         {
             // 设置文字
             self.statusLabel.text = MJRefreshFooterPullToRefresh;
-            
             // 刷新完毕
             if (MJRefreshStateRefreshing == oldState) {
                 self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
@@ -151,7 +150,6 @@
         {
             // 设置文字
             self.statusLabel.text = MJRefreshFooterReleaseToRefresh;
-            
             [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
                 self.arrowImage.transform = CGAffineTransformIdentity;
             }];

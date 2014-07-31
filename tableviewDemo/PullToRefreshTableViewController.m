@@ -22,14 +22,23 @@ static int row;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.title = @"Pull To Refresh TableView";
-    _myTable = [[UITableView alloc] initWithFrame:self.view.frame];
+    CGRect newframe = self.view.frame;
+    newframe.origin.y += 30;
+    _myTable = [[UITableView alloc] initWithFrame:newframe];
     _myTable.delegate = self;
     _myTable.dataSource = self;
     self.navigationController.navigationBar.translucent = YES;
     [self.view addSubview:_myTable];
     [_myTable addHeaderWithTarget:self action:@selector(headerRereshing)];
+    [_myTable addFooterWithTarget:self action:@selector(footerRefreshing)];
     row = 2;
     [_myTable headerBeginRefreshing];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 30)];
+    view.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:view];
+    
+    //_myTable.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,8 +53,19 @@ static int row;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         row += 2;
         [_myTable reloadData];
-        [_myTable headerEndRefreshing];
+       
     });
+     [_myTable headerEndRefreshing];
+}
+
+- (void)footerRefreshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        row += 2;
+        [_myTable reloadData];
+        
+    });
+    [_myTable footerEndRefreshing];
 }
 #pragma -
 #pragma mark UITableViewDataSource
@@ -66,7 +86,7 @@ static int row;
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"Row %d", indexPath.row];
-    
+    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 
