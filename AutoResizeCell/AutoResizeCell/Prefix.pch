@@ -1,0 +1,15 @@
+//
+//  Prefix.pch
+//  AutoResizeCell
+//
+//  Created by BILLY HO on 12/30/14.
+//  Copyright (c) 2014 BILLY HO. All rights reserved.
+//
+
+#ifndef AutoResizeCell_Prefix_pch
+#define AutoResizeCell_Prefix_pch
+
+#define MAS_SHORTHAND
+#import "Masonry.h"
+
+#endif
