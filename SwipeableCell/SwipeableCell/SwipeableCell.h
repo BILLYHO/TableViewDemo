@@ -26,7 +26,6 @@
 @property (nonatomic, strong) NSString *itemText;
 @property (nonatomic, weak) id <SwipeableCellDelegate> delegate;
 
-- (void)openCell;
 - (void)closeCell;
 
 @end

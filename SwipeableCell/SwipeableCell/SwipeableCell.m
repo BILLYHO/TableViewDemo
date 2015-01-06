@@ -7,8 +7,7 @@
 //
 
 #import "SwipeableCell.h"
-static CGFloat const kBounceValue = 10.0f;
-static CGFloat const kConstraintPadding = 8.0f;
+
 
 @interface SwipeableCell () <UIGestureRecognizerDelegate>
 
@@ -24,7 +23,11 @@ static CGFloat const kConstraintPadding = 8.0f;
 
 @implementation SwipeableCell
 
-- (void)awakeFromNib {
+static CGFloat const kBounceValue = 10.0f;
+static CGFloat const kConstraintPadding = 8.0f;
+
+- (void)awakeFromNib
+{
     // Initialization code
 	[super awakeFromNib];
  
@@ -42,18 +45,15 @@ static CGFloat const kConstraintPadding = 8.0f;
 			self.panStartPoint = [recognizer translationInView:self.myContentView];
 			self.startingRightLayoutConstraintConstant = self.contentViewRightConstraint.constant;
 			NSLog(@"Pan Began at %@", NSStringFromCGPoint(self.panStartPoint));
+			
+			_shouldOpenCell = YES;
 			if (self.delegate) {
 				_shouldOpenCell = [self.delegate cellShouldOpen:self];
-			} else {
-				_shouldOpenCell = YES;
 			}
-			if (abs(self.panStartPoint.x) > abs(self.panStartPoint.y))
-			{
+			
+			_isPanHorizontal = NO;
+			if ( abs(self.panStartPoint.x) > abs(self.panStartPoint.y) ){
 				_isPanHorizontal = YES;
-			}
-			else
-			{
-				_isPanHorizontal = NO;
 			}
 			break;
 		}
@@ -67,37 +67,34 @@ static CGFloat const kConstraintPadding = 8.0f;
 					[self.delegate cellWillOpen:self];
 				}
 				BOOL panningLeft = NO;
-				if (currentPoint.x < self.panStartPoint.x) {  //1
+				if (currentPoint.x < self.panStartPoint.x) {
 					panningLeft = YES;
 				}
 				
-				CGFloat adjustment = self.startingRightLayoutConstraintConstant - deltaX; //1
-				if (!panningLeft)
+				CGFloat adjustment = self.startingRightLayoutConstraintConstant - deltaX;
+				if (panningLeft)
 				{
-					CGFloat constant = MAX(adjustment, -2*kConstraintPadding); //2
+					CGFloat constant = MIN(adjustment, [self buttonTotalWidth]);
 					self.contentViewRightConstraint.constant = constant;
 				}
 				else
 				{
-					CGFloat constant = MIN(adjustment, [self buttonTotalWidth]); //5
+					CGFloat constant = MAX(adjustment, -2*kConstraintPadding);
 					self.contentViewRightConstraint.constant = constant;
-					
 				}
 				
-				
-				self.contentViewLeftConstraint.constant = -self.contentViewRightConstraint.constant - 2 * kConstraintPadding; //8
+				self.contentViewLeftConstraint.constant = -self.contentViewRightConstraint.constant - 2 * kConstraintPadding;
 			}
-			
 			break;
 		}
 		case UIGestureRecognizerStateEnded:
 		{
 			NSLog(@"Pan Ended");
 			if (self.startingRightLayoutConstraintConstant == -kConstraintPadding)
-			{ //1
+			{
 				CGFloat mostOfButtonOne = CGRectGetWidth(self.button1.frame) * 0.75;
 				
-				if (self.contentViewRightConstraint.constant >= mostOfButtonOne - kConstraintPadding) { //5
+				if (self.contentViewRightConstraint.constant >= mostOfButtonOne - kConstraintPadding) {
 					//Open all the way
 					[self setConstraintsToShowAllButtons:YES notifyDelegateDidOpen:YES];
 				} else {
@@ -141,8 +138,8 @@ static CGFloat const kConstraintPadding = 8.0f;
 	return CGRectGetWidth(self.frame) - CGRectGetMinX(self.button2.frame);
 }
 
-- (void)resetConstraintContstantsToZero:(BOOL)animated notifyDelegateDidClose:(BOOL)notifyDelegate {
-	//TODO: Notify delegate.
+- (void)resetConstraintContstantsToZero:(BOOL)animated notifyDelegateDidClose:(BOOL)notifyDelegate
+{
  
 	if (self.startingRightLayoutConstraintConstant == -kConstraintPadding &&
 		self.contentViewRightConstraint.constant == -kConstraintPadding) {
@@ -166,15 +163,14 @@ static CGFloat const kConstraintPadding = 8.0f;
 	}
 }
 
-- (void)setConstraintsToShowAllButtons:(BOOL)animated notifyDelegateDidOpen:(BOOL)notifyDelegate {
-	//TODO: Notify delegate.
- 
-	//1
+- (void)setConstraintsToShowAllButtons:(BOOL)animated notifyDelegateDidOpen:(BOOL)notifyDelegate
+{
+
 	if (self.startingRightLayoutConstraintConstant == [self buttonTotalWidth] - kConstraintPadding &&
 		self.contentViewRightConstraint.constant == [self buttonTotalWidth] - kConstraintPadding) {
 		return;
 	}
-	//2
+	
 	self.contentViewLeftConstraint.constant = -[self buttonTotalWidth] - kBounceValue - kConstraintPadding;
 	self.contentViewRightConstraint.constant = [self buttonTotalWidth] + kBounceValue - kConstraintPadding;
  
@@ -184,7 +180,6 @@ static CGFloat const kConstraintPadding = 8.0f;
 		self.contentViewRightConstraint.constant = [self buttonTotalWidth] - kConstraintPadding;
 		
 		[self updateConstraintsIfNeeded:animated completion:^(BOOL finished) {
-			//4
 			self.startingRightLayoutConstraintConstant = self.contentViewRightConstraint.constant;
 		}];
 	}];
@@ -206,21 +201,19 @@ static CGFloat const kConstraintPadding = 8.0f;
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
-- (void)setItemText:(NSString *)itemText {
-	//Update the instance variable
+- (void)setItemText:(NSString *)itemText
+{
 	_itemText = itemText;
- 
-	//Set the text to the custom label.
 	self.myTextLabel.text = _itemText;
 }
 
-- (IBAction)buttonClicked:(id)sender {
+- (IBAction)buttonClicked:(id)sender
+{
 	if (sender == self.button1) {
 		[self.delegate buttonOneActionForItemText:self.itemText];
 	} else if (sender == self.button2) {
@@ -236,13 +229,10 @@ static CGFloat const kConstraintPadding = 8.0f;
 	return YES;
 }
 
-- (void)prepareForReuse {
+- (void)prepareForReuse
+{
 	[super prepareForReuse];
 	[self resetConstraintContstantsToZero:NO notifyDelegateDidClose:NO];
-}
-
-- (void)openCell {
-	[self setConstraintsToShowAllButtons:NO notifyDelegateDidOpen:NO];
 }
 
 - (void)closeCell
