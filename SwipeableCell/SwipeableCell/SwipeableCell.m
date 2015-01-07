@@ -51,8 +51,9 @@ static CGFloat const kConstraintPadding = 8.0f;
 				_shouldOpenCell = [self.delegate cellShouldOpen:self];
 			}
 			
+			CGPoint direction = [recognizer velocityInView:self.myContentView];
 			_isPanHorizontal = NO;
-			if ( abs(self.panStartPoint.x) > abs(self.panStartPoint.y) ){
+			if ( abs(direction.x) > abs(direction.y) ){
 				_isPanHorizontal = YES;
 			}
 			break;

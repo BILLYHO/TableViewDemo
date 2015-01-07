@@ -65,7 +65,7 @@
 {
 	SwipeableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
  
-	NSString *item = [NSString stringWithFormat:@"Longer Title Item #%ld", indexPath.row];
+	NSString *item = _objects[indexPath.row];
 	cell.itemText = item;
 	cell.delegate = self;
 	return cell;
